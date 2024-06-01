@@ -7,7 +7,7 @@ function App() {
 	const [count, setCount] = useState(0);
 	const [pingResponse, setPingResponse] = useState("");
 	const doPing = useCallback(() => {
-		fetch("/ping")
+		fetch("api/ping")
 			.then((res) => res.text())
 			.then(setPingResponse);
 	}, []);
