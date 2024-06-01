@@ -26,6 +26,8 @@ mvn clean install
 ### 3. Run the Application
 
 - [3.1 Run Java Application with static frontend](#run-java-app)
+- [3.2 Run Java Application with Node Frontend Dev Server](#run-java-and-front-dev)
+
 
 ### <a id="run-java-app"></a> 3.1 Run Java Application with static frontend
 
@@ -46,11 +48,13 @@ Backend ping endpoint should be accessible by the next call:
 curl http://localhost:8080/api/ping
 ```
 
-This should return a simple `pong` message. You can use a web browser or a tool like `curl` to access this endpoint:
+### <a id="run-java-and-front-dev"></a> 3.2 Run Java Application with Node Frontend Dev Server
 
+Same as for [3.1](#run-java-app) plus
 ```bash
-curl http://localhost:8080/ping
+npm --prefix ./src/main/frontend/ run dev
 ```
+Now frontend should be accessible by the next url: http://localhost:5173
 
 ## Technologies
 
