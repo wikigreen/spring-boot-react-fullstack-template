@@ -25,18 +25,25 @@ mvn clean install
 
 ### 3. Run the Application
 
+- [3.1 Run Java Application with static frontend](#run-java-app)
+
+### <a id="run-java-app"></a> 3.1 Run Java Application with static frontend
+
+```bash
+mvn clean install
+```
+
 After successfully compiling the project, run the application using the following command:
 
 ```bash
 java -jar ./target/spring-boot-react-fullstack-template-*-SNAPSHOT.jar
 ```
 
-### 4. Access the Ping Endpoint
+Now frontend should be accessible by the next url: http://localhost:8080\
+Backend ping endpoint should be accessible by the next call:
 
-You can test the application by accessing the ping endpoint:
-
-```
-GET /ping
+```bash
+curl http://localhost:8080/api/ping
 ```
 
 This should return a simple `pong` message. You can use a web browser or a tool like `curl` to access this endpoint:
