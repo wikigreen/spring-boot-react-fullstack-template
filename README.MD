@@ -15,7 +15,7 @@ This repository serves as a template for a Java application using Spring Boot. I
 First, clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/yourusername/java-fullstack-template.git
+git clone https://github.com/wikigreen/spring-boot-react-fullstack-template
 cd spring-boot-react-fullstack-template
 ```
 
