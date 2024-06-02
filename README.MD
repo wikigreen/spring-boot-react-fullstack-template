@@ -1,7 +1,15 @@
 
 # Java Fullstack Template
 
-This repository serves as a template for a Java application using Spring Boot. It includes a basic setup with a simple `ping` resource. You can clone this repository to use as a starting point for your own projects.
+This project is a Java application utilizing Spring Boot for the backend and React for the frontend. Unlike typical projects that require a separate server to serve frontend files, this application integrates the static frontend files directly into the final JAR during the build process. This streamlined approach ensures that both the backend and frontend run seamlessly on the same host, simplifying deployment and reducing the need for additional infrastructure.
+
+## Key Features
+
+- Unified Build Process: With a single command `mvn clean install`, the application automatically handles the build processes for both the backend and frontend. This includes building the frontend and incorporating its static files into the final JAR.
+- Simplified Deployment: No need for a separate server to host the frontend. The application serves both the backend and frontend from the same host, reducing complexity and resource requirements.
+- Spring Boot and React Integration: Leverages the power and flexibility of Spring Boot for the backend and React for a dynamic, responsive frontend experience.
+
+This integration provides an efficient, hassle-free deployment process, making it easier to manage and run the application.
 
 ## Prerequisites
 
@@ -54,7 +62,7 @@ mvn clean install
 
 - [2.1 Run Java Application with static frontend](#run-java-app)
 - [2.2 Run Java Application in Docker](#run-java-and-front-dev)
-- [2.3 Run Java Application with Node Frontend Dev Server](#run-java-in-docker)
+- [2.3 Run Java Application with Node Frontend Dev Server](#run-docker)
 
 
 ### <a id="run-java-app"></a> 2.1 Run Java Application with static frontend
@@ -69,14 +77,14 @@ After successfully compiling the project, run the application using the followin
 java -jar ./target/spring-boot-react-fullstack-template-*-SNAPSHOT.jar
 ```
 
-Now frontend should be accessible by the next url: http://localhost:8080\
+Now frontend should be accessible by the next url: http://localhost:8080 \
 Backend ping endpoint should be accessible by the next call:
 
 ```bash
 curl http://localhost:8080/api/ping
 ```
 
-### <a id="run-docker"></a> 2.2 Run Java Application in Docker
+### <a id="run-java-and-front-dev"></a> 2.2 Run Java Application in Docker
 
 ```bash
 mvn clean install
@@ -94,7 +102,7 @@ curl http://localhost:8181/api/ping
 ```
 
 
-### <a id="run-java-and-front-dev"></a> 2.3 Run Frontend Dev Server
+### <a id="run-docker"></a> 2.3 Run Frontend Dev Server
 
 Frontend dev server requires Backend to be run. You can follow guide specified in [2.1](#run-java-app)
 as well as in [2.2](#run-docker).\
