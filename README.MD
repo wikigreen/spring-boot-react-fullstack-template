@@ -23,13 +23,13 @@ cd spring-boot-react-fullstack-template
 mvn clean install
 ```
 
-### 3. Run the Application
+### 2. Run the Application
 
-- [3.1 Run Java Application with static frontend](#run-java-app)
-- [3.2 Run Java Application with Node Frontend Dev Server](#run-java-and-front-dev)
+- [2.1 Run Java Application with static frontend](#run-java-app)
+- [2.2 Run Java Application with Node Frontend Dev Server](#run-java-and-front-dev)
 
 
-### <a id="run-java-app"></a> 3.1 Run Java Application with static frontend
+### <a id="run-java-app"></a> 2.1 Run Java Application with static frontend
 
 ```bash
 mvn clean install
@@ -48,9 +48,9 @@ Backend ping endpoint should be accessible by the next call:
 curl http://localhost:8080/api/ping
 ```
 
-### <a id="run-java-and-front-dev"></a> 3.2 Run Java Application with Node Frontend Dev Server
+### <a id="run-java-and-front-dev"></a> 2.2 Run Java Application with Node Frontend Dev Server
 
-Same as for [3.1](#run-java-app) plus
+Same as for [2.1](#run-java-app) plus
 ```bash
 npm --prefix ./src/main/frontend/ run dev
 ```
