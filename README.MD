@@ -92,7 +92,7 @@ mvn clean install
 
 After successfully compiling the project, run the application using the following command:
 ```bash
-docker-compose up
+docker-compose up --build
 ```
 Now frontend should be accessible by the next url: http://localhost:8181\
 Backend ping endpoint should be accessible by the next call:
