@@ -1,41 +1,74 @@
-import { useCallback, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
+import { useCallback, useEffect, useState } from "react";
+import { Task } from "./type";
+import { Task as TaskComponent } from "./components/Task";
 
 function App() {
-	const [count, setCount] = useState(0);
-	const [pingResponse, setPingResponse] = useState("");
-	const doPing = useCallback(() => {
-		fetch("api/ping")
-			.then((res) => res.text())
-			.then(setPingResponse);
+	const [tasks, setTasks] = useState<Task[]>([]);
+	const [addMode, setAddMode] = useState(false);
+
+	useEffect(() => {
+		fetch("api/task")
+			.then((res) => res.json())
+			.then((tasks) => setTasks(tasks));
+	}, []);
+
+	const onDelete = useCallback(async (id: number) => {
+		await fetch(`api/task/${id}`, {
+			method: "DELETE",
+		});
+		setTasks((tasks) => tasks.filter((task) => task.id !== id));
+	}, []);
+
+	const onUpdate = useCallback(async (task: Task) => {
+		const taskRes: Task = await fetch(`api/task`, {
+			method: "PUT",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(task),
+		}).then((res) => res.json());
+
+		setTasks((tasks) => [
+			...tasks.filter((task) => task.id !== taskRes.id),
+			taskRes,
+		]);
+	}, []);
+
+	const onCreate = useCallback(async (task: Task) => {
+		const taskRes: Task = await fetch(`api/task`, {
+			method: "POST",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(task),
+		}).then((res) => res.json());
+
+		setTasks((tasks) => [...tasks, taskRes]);
+		setAddMode(false);
 	}, []);
 
 	return (
 		<>
-			<div>
-				<a href="https://vitejs.dev" target="_blank">
-					<img src={viteLogo} className="logo" alt="Vite logo" />
-				</a>
-				<a href="https://react.dev" target="_blank">
-					<img src={reactLogo} className="logo react" alt="React logo" />
-				</a>
-			</div>
-			<h1>Vite + React</h1>
-			<div className="card">
-				<button onClick={() => setCount((count) => count + 1)}>
-					count is {count}
-				</button>
-				<button onClick={doPing}>Do ping</button>
-				{pingResponse && <p>Server responded {pingResponse}</p>}
-				<p>
-					Edit <code>src/App.tsx</code> and save to test HMR
-				</p>
-			</div>
-			<p className="read-the-docs">
-				Click on the Vite and React logos to learn more
-			</p>
+			<h1>Todo list:</h1>
+			{tasks.map((task) => (
+				<TaskComponent
+					key={task.id}
+					task={task}
+					onDelete={onDelete}
+					onUpdate={onUpdate}
+				/>
+			))}
+			{addMode && (
+				<TaskComponent
+					editMode
+					onUpdate={onCreate}
+					onEditCancel={() => setAddMode(false)}
+				/>
+			)}
+			<button onClick={() => setAddMode(true)}>Add new task</button>
 		</>
 	);
 }
