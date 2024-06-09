@@ -1,6 +1,8 @@
 version: '3.8'
 services:
   client-backend:
+    depends_on:
+      - postgres1
     build:
       context: .
       dockerfile: Dockerfile
@@ -8,6 +10,9 @@ services:
       - "8181:8181"
     environment:
       - SERVER_PORT= 8181
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres1:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
   postgres1:
     image: postgres:16.3
     environment:
